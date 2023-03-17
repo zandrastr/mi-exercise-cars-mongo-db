@@ -8,6 +8,20 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+//Import the installed package
+const MongoClient = require("mongodb").MongoClient;
+
+//Connect MongoDB to local
+MongoClient.connect("mongodb://127.0.0.1:27017", {
+    useUnifiedTopology: true
+})
+.then(client => {
+    console.log("connection to db ok");
+
+    const db = client.db("cars");
+    app.locals.db = db;
+})
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
