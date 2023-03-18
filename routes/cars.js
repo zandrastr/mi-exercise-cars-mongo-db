@@ -12,7 +12,23 @@ router.get('/', function(req, res, next) {
 
   .then(results => {
     console.log(results);
-    res.send(results);
+
+    let printCars = "<h1>Cars</h1> <ul>"
+
+    //Loop the results
+    for (car in results) {
+      printCars += "<li>" 
+      + results[car].carMake + " - "
+      + results[car].carModel + " - " 
+      + results[car].carMake + " - "
+      + results[car].carYear + " - "
+      + results[car].carColor 
+      + "</li>"
+    }
+
+    printCars += "</ul>"
+
+    res.send(printCars);
   })
 });
 
