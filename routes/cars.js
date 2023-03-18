@@ -4,8 +4,11 @@ var router = express.Router();
 //GET cars listing
 router.get('/', function(req, res, next) {
 
-  //Retrieve all documents from the "cars" collection in the MongoDB database and return them as an array
-  req.app.locals.db.collection("cars").find().toArray()
+  //Retrieve documents from the "cars" collection in the MongoDB database and return them as an array
+  //Use querys to filter on specified car year (less than or equal to 1991)
+  //Limit to 20 results
+  //Sort based on car year in descending order
+  req.app.locals.db.collection("cars").find({"carYear": {$lte: 1991}}).limit(20).sort({"carYear": -1}).toArray()
 
   .then(results => {
     console.log(results);
